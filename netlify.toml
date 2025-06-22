@@ -6,4 +6,5 @@
 
 [functions]
   directory = "netlify/functions"
+  included_files = ["src/blog/entries/**"]
   node_bundler = "esbuild"
