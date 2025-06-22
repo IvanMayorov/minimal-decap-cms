@@ -2,3 +2,7 @@
   base = ""  
   command = "npm run build"  
   publish = "src"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
