@@ -1,19 +1,17 @@
 const fs = require('fs');
 const path = require('path');
-const matter = require('gray-matter');
 
 exports.handler = async () => {
   try {
-    const dir = path.join(__dirname, '../../content/posts');
-    const files = fs.readdirSync(dir);
+    const dir = path.join(__dirname, '../../src/blog/entries');
+    const files = fs.readdirSync(dir).filter(file => file.endsWith('.json'));
 
     const posts = files.map((file) => {
       const raw = fs.readFileSync(path.join(dir, file), 'utf-8');
-      const { data, content } = matter(raw);
+      const postData = JSON.parse(raw);
       return {
-        ...data,
-        body: content,
-        slug: file.replace(/\.md$/, ''),
+        ...postData,
+        slug: file.replace(/\.json$/, ''),
       };
     });
 
